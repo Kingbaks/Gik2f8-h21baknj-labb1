@@ -8,26 +8,17 @@
 <body class="bg-gradient-to-tr from-sky-400 to-lime-500 h-screen">
     <h1 class="text-green-900 text-6xl text-center mt-4 mb-7">Sök böcker</h1>
 
-    <main
+    <main id="root"
 	class="bg-white/40 py-12 px-6 w-full md:w-4/5 mx-auto rounded-lg flex justify-center align-center flex-col
 gap-2"> 
 	<label class="text-green-900 text-xl block" for="searchField">Ange sökord</label> 
 	<input class="rounded-full p-2"
 			id="searchField" 
 			type="text" /> 
-			<ul class="book-list rounded-md border-2_border-blue-400 bg-white w-full mx-auto">
-              <li
-                    class="book-list__item mb-2 mx-2 last:mb-op-3 text-indigo-900 last:border-b-0 border-b border-indigo-700 cursor-pointer">
-                1
-              </li> 
-              <li
-                    class="book-list__item mb-2 mx-2 last:mb-op-3 text-indigo-900 last:border-b-0 border-b border-indigo-700 cursor-pointer">
-                2
-              </li>
-                  
-			 
-			</ul>
+			
 </main>
+    <script src="Components\BooklistItem.js"></script>
+    <script src="Components\Booklist.js"></script>          
     <script src="script.js"></script> 
     </body>
 </html>

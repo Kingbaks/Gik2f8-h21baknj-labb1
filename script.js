@@ -1,9 +1,5 @@
 'use strict';
 
-console.log('test');
-
-
-
 const bookList = [
     {
         id: 1,
@@ -12,49 +8,70 @@ const bookList = [
     },
     {
         id: 2,
-        author: 'samie',
-        title: 'doggie style'
+        author: 'Sara',
+        title: 'style'
+    },
+    {
+        id: 3,
+        author: 'wilma',
+        title: 'panna'
     }
-];
-const searchInput = null;
 
-function handleKeyPress (input) {
+];
+// const searchInput = document.children[0].children[1].children[1];
+// const searchField = document.getElementById('searchField');
+// console.log(searchField);
+
+// Input, beforeinput, keypress
+
+searchField.addEventListener("keyup", handleKeyPress);
+
+function handleKeyPress (e) {
     /*
     Ta emot/läsa av värdet i input
     skick värdet till searchbook
     searchBooks returnera en filtrerad lista
     filtrerade listan skickas till renderlist 
     */
-    searchBooks(input);
+    searchBooks(e.target.value);
 }
-let filteredList = [];
+
 
 function searchBooks(searchTerm) {
+    const filteredList = [];
 
    for ( let i = 0; i < bookList.length; i++) {
     //const title = bookList[i].title.toLowerCase();
     const author = bookList[i].author.toLowerCase();
     
-    /*if (title.indexOf(searchTerm.toLowerCase()) >= 0 ) {
-        console.log('match?');
-        filteredList.push(bookList[0]);
-    }*/
     if (author.indexOf(searchTerm.toLowerCase()) >= 0 ) {
-        console.log('match?');
         filteredList.push(bookList[i]);
     }
+ 
+    renderBookList(filteredList);
    }
-   renderbookList(filteredList);
-
-
+  
 }
 
-handleKeyPress('a');
+function renderBookList (bookList){
 
-function renderbookList (list){
-console.log(list);
+
+
+  const existingElement = document.querySelector(".book-list");
+  console.log(existingElement);
+  
+  const root = document.getElementById('root');
+  if (existingElement) {
+    root.removeChild(existingElement);
+  }
+
+
+if (bookList.length > 0) {
+
+  root.insertAdjacentHTML('beforeend', BookList(bookList)); 
+
 }
-
+}
 
 
 
