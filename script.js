@@ -1,23 +1,12 @@
 'use strict';
 
-const bookList = [
-    {
-        id: 1,
-        author: 'baks',
-        title: 'Ska visa dig hur du blir bäst'
-    },
-    {
-        id: 2,
-        author: 'Sara',
-        title: 'style'
-    },
-    {
-        id: 3,
-        author: 'wilma',
-        title: 'panna'
-    }
+let bookList = [];
+   
+window.addEventListener('load',() => {
+    getAll().then((apiBooks) => (bookList = apiBooks));
 
-];
+
+});
 // const searchInput = document.children[0].children[1].children[1];
 // const searchField = document.getElementById('searchField');
 // console.log(searchField);
@@ -44,8 +33,8 @@ renderBookList(
         return    author.toLowerCase().indexOf(searchTerm.toLowerCase())>= 0 ||   title.toLowerCase().indexOf(searchTerm)>= 0 ); */
 
 
-function searchBooks(searchTerm) {
-    //const filteredList = [];
+async function searchBooks(searchTerm) {
+     //const bookList = await getAll()
      const filteredList = bookList.filter(({author, title}) =>  author.toLowerCase().indexOf(searchTerm.toLowerCase())>= 0 || 
       title.toLowerCase().indexOf(searchTerm.toLowerCase())>= 0 );
 
@@ -74,13 +63,14 @@ function renderBookList (bookList){
   }
 
 
-if (bookList.length > 0) {
+if (bookList.length > 0 && searchField.value) {
 
   root.insertAdjacentHTML('beforeend', BookList(bookList)); 
 
 }
 }
 
+/* getAll().then((bookList) => console.log(bookList)); */
 
 
 
