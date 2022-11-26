@@ -4,7 +4,7 @@ const bookList = [
     {
         id: 1,
         author: 'baks',
-        title: 'lol'
+        title: 'Ska visa dig hur du blir bäst'
     },
     {
         id: 2,
@@ -36,20 +36,28 @@ function handleKeyPress (e) {
     searchBooks(e.target.value);
 }
 
+// another way to use the searchfiled 
+/* searchField.addEventListener("keyup", (e) =>
+renderBookList(
+    bookList.filter(({author, title}) =>  {
+        const searchTerm = e.target.value.toLowerCase();
+        return    author.toLowerCase().indexOf(searchTerm.toLowerCase())>= 0 ||   title.toLowerCase().indexOf(searchTerm)>= 0 ); */
+
 
 function searchBooks(searchTerm) {
-    const filteredList = [];
+    //const filteredList = [];
+     const filteredList = bookList.filter(({author, title}) =>  author.toLowerCase().indexOf(searchTerm.toLowerCase())>= 0 || 
+      title.toLowerCase().indexOf(searchTerm.toLowerCase())>= 0 );
 
-   for ( let i = 0; i < bookList.length; i++) {
+  /*  for ( let i = 0; i < bookList.length; i++) {
     //const title = bookList[i].title.toLowerCase();
     const author = bookList[i].author.toLowerCase();
     
     if (author.indexOf(searchTerm.toLowerCase()) >= 0 ) {
         filteredList.push(bookList[i]);
-    }
- 
-    renderBookList(filteredList);
-   }
+    } */
+     renderBookList(filteredList);
+   
   
 }
 
