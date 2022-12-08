@@ -5,6 +5,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>GIK2F8 - Sökfunktion</title>
+		<link rel="shortcut icon" href="#" />
 		<script src="https://cdn.tailwindcss.com"></script>
 	</head>
 
@@ -19,9 +20,26 @@
 			>
 			<input class="rounded-full p-2" id="searchField" type="text" />
 		</main>
+
+		<!-- <div id="bookDetail" >
+        <img src= ${book.coverImage} alt="Knas inget o se här">
+
+        <div ></div>
+            <ul class="divst">
+                <div>Title: ${book.title}</div>
+                <div>Author: ${book.author}</div>
+                <div>Release date: ${book.releaseDate}</div>
+            </ul>
+        </div>
+    </div> -->
+		
+    </div>
 		<script src="api/api.js"></script>
-		<script src="Components\BooklistItem.js"></script>
-		<script src="Components\Booklist.js"></script>
+		<script src="Components\BookListItem.js"></script>
+		<script src="Components\BookList.js"></script>
+		<script src="Components\Bookdetail.js"></script>
 		<script src="script.js"></script>
+		
+		
 	</body>
 </html>
