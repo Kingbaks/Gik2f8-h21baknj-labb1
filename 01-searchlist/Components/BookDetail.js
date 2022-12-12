@@ -1,6 +1,6 @@
 const bookDetails = (book) => {
 	let html = `
-    <div id="bookDetail" class="book__details top-3 right-40 rounded-lg bg-slate-600 p-4 w-4/5 top-20 mx-5 mx-auto
+    <div id="bookDetail" class="book__details top-4 right-40 rounded-lg bg-slate-600 p-4 w-4/5 top-20 mx-5 mx-auto
     flex flex-row text-center text-black-400 font-semibold">
         <img src="${book.coverImage}" alt="Knas inget o se här" "max-w-md"
 
