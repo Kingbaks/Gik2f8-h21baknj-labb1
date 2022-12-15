@@ -52,9 +52,10 @@ app.post("/tasks", async (req, res) => {
 	}
 });
 
-app.delete("/tasks/:Id", async (req, res) => {
+app.delete("/tasks/:id", async (req, res) => {
 	try {
 		const id = req.params.id;
+		console.log(id);
 		const listBuffer = await fs.readFile("./tasks.json");
 		const currentTasks = JSON.parse(listBuffer);
 
