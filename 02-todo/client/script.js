@@ -5,11 +5,14 @@ todoForm.dueDate.addEventListener("input", (e) => validateField(e.target));
 todoForm.dueDate.addEventListener("blur", (e) => validateField(e.target));
 
 todoForm.addEventListener("submit", onSubmit);
+
 const todoListElement = document.getElementById("todoList");
 
 let titleValid = true;
 let descriptionValid = true;
 let dueDateValid = true;
+
+const api = new Api("http://localhost:5000/tasks");
 
 function validateField(field) {
 	const { name, value } = field;
@@ -56,8 +59,76 @@ function validateField(field) {
 	field.previousElementSibling.innerText = validationMessage;
 
 	field.previousElementSibling.classList.remove("hidden");
+}
+function onSubmit(e) {
+	e.preventDefault();
 
-	function onSubmit(e) {
-		e.preventDefault();
+	if (titleValid && descriptionValid && dueDateValid) {
+		console.log("Submit");
+
+		saveTask();
+	}
+
+	function saveTask() {
+		const task = {
+			title: todoForm.title.value,
+			description: todoForm.description.value,
+			dueDate: todoForm.dueDate.value,
+			completed: false,
+		};
+
+		api.create(task).then((task) => {
+			if (task) {
+				renderList();
+			}
+		});
 	}
 }
+
+function renderList() {
+	console.log("rendering");
+	api.getAll().then((tasks) => {
+		console.log(tasks);
+		todoListElement.innerHTML = "";
+		if (tasks && tasks.length > 0) {
+			// sortDueDate(tasks);
+			// sortFinished(tasks);
+			tasks.forEach((task) => {
+				todoListElement.insertAdjacentHTML("beforeend", renderTask(task));
+			});
+		}
+	});
+}
+
+function renderTask({ id, title, description, dueDate, completed }) {
+	const taskStatus = completed == true ? "checked" : "";
+	const taskFinished = completed == true ? "blur-sm" : "";
+	let html = `
+    <li class="select-none mt-2 py-2 border-b border-amber-300 ${taskFinished} ">
+      <div class="flex items-center">
+      <input type="checkbox" value="${id}" onclick="updateTask(${id})" ${taskStatus}/>
+
+        <h3 class="mb-3 flex-1 text-xl font-bold text-pink-800 uppercase">${title}</h3>
+        <div>
+          <span>${dueDate}</span>
+          <button onclick="deleteTask(${id})" class="inline-block bg-amber-500 text-xs text-amber-900 border border-white px-3 py-1 rounded-md ml-2">Ta bort</button>
+        </div>
+      </div>`;
+	description &&
+		(html += `
+      <p class="ml-8 mt-2 text-xs italic">${description}</p>
+  `);
+
+	html += `
+    </li>`;
+	return html;
+}
+
+function deleteTask(id) {
+	console.log(id);
+	api.remove(id).then((result) => {
+		renderList();
+	});
+}
+
+renderList();
